@@ -2,8 +2,9 @@ require 'net/http'
 
 class AddressController < ApplicationController
   def show
+    search_params = params[:search] || nil
     # hash形式でパラメタ文字列を指定し、URL形式にエンコード
-    params = URI.encode_www_form({zipcode: 'hoge'})
+    params = URI.encode_www_form({zipcode: search_params})
     # URIを解析し、hostやportをバラバラに取得できるようにする
     uri = URI.parse("http://zipcloud.ibsnet.co.jp/api/search?#{params}")
     # リクエストパラメタを、インスタンス変数に格納
